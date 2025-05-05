@@ -13,12 +13,24 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://cdn.discordapp.com/attachments/1043467176591491153/1368876186985304124/detail-shot-skyscrapers.jpg?ex=6819d0cb&is=68187f4b&hm=2ad6053d4f9ee6bbae0e20f0a12db3f1d05a234a5112bba5894b277f96d2b2de&') no-repeat center center fixed;
+      background-image: url('https://cdn.discordapp.com/attachments/1043467176591491153/1368876186985304124/detail-shot-skyscrapers.jpg?ex=6819d0cb&is=68187f4b&hm=2ad6053d4f9ee6bbae0e20f0a12db3f1d05a234a5112bba5894b277f96d2b2de&');
       background-size: cover;
+      background-position: center;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+    }
+
+    .background-blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      backdrop-filter: blur(8px);
+      z-index: 0;
     }
 
     .loader-wrapper {
@@ -50,6 +62,8 @@
     }
 
     .container {
+      position: relative;
+      z-index: 1;
       background-color: rgba(255, 255, 255, 0.95);
       padding: 30px;
       border-radius: 12px;
@@ -96,26 +110,32 @@
     .button {
       margin-bottom: 20px;
     }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 200px;
+    }
   </style>
 </head>
 <body>
+  <div class="background-blur"></div>
+
   <div class="loader-wrapper">
     <span class="loader"></span>
   </div>
 
   <div class="container">
-    <!-- Logo (200px wide) -->
-    <a href="https://www.example.com" target="_blank">
-      <img src="https://cdn.discordapp.com/attachments/1043467176591491153/1368834969920868433/WhatsApp_Image_2025-05-05_at_10.13.15_AM.jpeg?ex=6819aa68&is=681858e8&hm=a15fbb21871162022926b4d372f8560c7e3e0113a27470002b9621cac73af3e5"
-           alt="Waves Technology & Services Logo"
-           width="200"
-           style="display: block; margin: 0 auto 20px;" />
-    </a>
+    <div class="logo">
+      <a href="https://www.example.com">
+        <img src="https://cdn.discordapp.com/attachments/1043467176591491153/1368834969920868433/WhatsApp_Image_2025-05-05_at_10.13.15_AM.jpeg?ex=6819aa68&is=681858e8&hm=a15fbb21871162022926b4d372f8560c7e3e0113a27470002b9621cac73af3e5" alt="Waves Technology & Services Logo">
+      </a>
+    </div>
 
-    <!-- Training Button -->
     <button class="button" onclick="window.open('https://www.youtube.com/watch?v=YOUR_VIDEO_ID', '_blank')">Training</button>
 
-    <!-- Feedback Form -->
     <form action="https://formspree.io/f/mqaqqaln" method="POST">
       <h2>We value your feedback</h2>
       <textarea name="feedback" placeholder="Write your feedback here..." required></textarea>
