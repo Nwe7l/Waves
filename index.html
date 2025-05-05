@@ -64,7 +64,7 @@
     .container {
       position: relative;
       z-index: 1;
-      background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%);
+      background: linear-gradient(to top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,1) 100%);
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -118,33 +118,6 @@
     .button {
       margin-bottom: 20px;
     }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .social-circle {
-      width: 50px;
-      height: 50px;
-      background-color: #3498db;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.3s ease;
-    }
-
-    .social-circle:hover {
-      background-color: #2980b9;
-    }
-
-    .social-circle img {
-      width: 24px;
-      height: 24px;
-    }
   </style>
 </head>
 <body>
@@ -163,21 +136,12 @@
 
     <button class="button" onclick="window.open('https://www.youtube.com/watch?v=YOUR_VIDEO_ID', '_blank')">Training</button>
 
-    <form action="https://formspree.io/f/xrbqqdp" method="POST">
+    <form action="https://formspree.io/f/mqaqqaln" method="POST">
       <h2>We value your feedback</h2>
       <textarea name="feedback" placeholder="Write your feedback here..." required></textarea>
       <input type="tel" name="phone" placeholder="Enter your phone number" required />
       <button class="submit-btn" type="submit">Submit</button>
     </form>
-
-    <div class="social-links">
-      <a class="social-circle" href="https://www.wavestech.om" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/84/84010.png" alt="Website">
-      </a>
-      <a class="social-circle" href="https://www.instagram.com/wavestech.om?igsh=eWRyNGkxN3hkdnhv" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-      </a>
-    </div>
   </div>
 
   <script>
