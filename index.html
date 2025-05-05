@@ -64,7 +64,7 @@
     .container {
       position: relative;
       z-index: 1;
-      background: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+      background-color: #ffffff; /* Changed from rgba(...) to solid white */
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -141,3 +141,13 @@
       <textarea name="feedback" placeholder="Write your feedback here..." required></textarea>
       <input type="tel" name="phone" placeholder="Enter your phone number" required />
       <button class="submit-btn" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    window.addEventListener('load', function () {
+      document.querySelector('.loader-wrapper').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
