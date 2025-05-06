@@ -64,7 +64,7 @@
     .container {
       position: relative;
       z-index: 1;
-      background: linear-gradient(to top, rgba(255,255,255,0.7) 10%, rgba(255,255,255,1) 50%);
+      background: linear-gradient(to top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,1) 100%);
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -118,6 +118,31 @@
     .button {
       margin-bottom: 20px;
     }
+
+    .circle-links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .circle-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #3498db;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-size: 24px;
+      transition: background-color 0.3s ease;
+    }
+
+    .circle-button:hover {
+      background-color: #2980b9;
+    }
   </style>
 </head>
 <body>
@@ -129,7 +154,7 @@
 
   <div class="container">
     <div class="logo">
-      <a href="https://www.example.com">
+      <a href="https://www.wavestech.om/">
         <img src="https://cdn.discordapp.com/attachments/1043467176591491153/1368834969920868433/WhatsApp_Image_2025-05-05_at_10.13.15_AM.jpeg?ex=6819aa68&is=681858e8&hm=a15fbb21871162022926b4d372f8560c7e3e0113a27470002b9621cac73af3e5" alt="Waves Technology & Services Logo">
       </a>
     </div>
@@ -144,6 +169,11 @@
       <input type="tel" name="phone" placeholder="Enter your phone number" />
 
       <button class="submit-btn" type="submit">Send</button>
+
+      <div class="circle-links">
+        <a class="circle-button" href="https://www.wavestech.om/?fbclid=PAZXh0bgNhZW0CMTEAAae4DfSAedI1kxBXJ6JY-Nuzb6tZzzOCQg31REWw9ynHwT-VbnWUSoRat-818g_aem_1M2VMH6kFX-6OqxeDp3oOg#" target="_blank" title="Website">🌐</a>
+        <a class="circle-button" href="https://www.instagram.com/wavestech.om?igsh=eWRyNGkxN3hkdnhv" target="_blank" title="Instagram">📸</a>
+      </div>
     </form>
   </div>
 
