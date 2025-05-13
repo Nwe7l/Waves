@@ -165,9 +165,44 @@
       flex: 1 1 45%;
       min-width: 120px;
     }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      background-image: none;
+      color: #f0f0f0;
+    }
+
+    body.dark-mode .container {
+      background: linear-gradient(to top, rgba(30,30,30,0.7) 0%, rgba(30,30,30,1) 100%);
+      box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+    }
+
+    body.dark-mode input,
+    body.dark-mode textarea,
+    body.dark-mode select {
+      background-color: #1e1e1e;
+      color: #f0f0f0;
+      border: 1px solid #555;
+    }
+
+    body.dark-mode ::placeholder {
+      color: #aaa;
+    }
+
+    body.dark-mode h2 {
+      color: #fff;
+    }
   </style>
 </head>
 <body>
+  <!-- Dark Mode Toggle Button -->
+  <div id="dark-toggle" style="position: absolute; top: 20px; right: 130px; z-index: 10;">
+    <button onclick="toggleDarkMode()" style="padding: 8px 16px; border: none; background: #3498db; color: white; border-radius: 8px; cursor: pointer;">
+      Dark Mode
+    </button>
+  </div>
+
   <!-- Language Toggle Button -->
   <div id="lang-toggle" style="position: absolute; top: 20px; right: 20px; z-index: 10;">
     <button onclick="toggleLanguage()" style="padding: 8px 16px; border: none; background: #3498db; color: white; border-radius: 8px; cursor: pointer;">
@@ -277,6 +312,10 @@
       document.getElementById('submit-btn').innerText = translations[lang].submit;
       document.getElementById('region').options[0].text = translations[lang].regionDefault;
       document.getElementById('lang-toggle').children[0].innerText = translations[lang].toggleBtn;
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
     }
   </script>
 </body>
