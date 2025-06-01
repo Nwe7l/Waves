@@ -195,7 +195,10 @@
 
       <textarea name="message" id="message" placeholder="Write your message here..." required></textarea>
 
-      <input type="text" name="serial" id="serial" placeholder="Enter screen serial number" required />
+      <div class="input-row">
+        <input type="text" name="serial" id="serial" placeholder="Enter screen serial number" required />
+        <input type="text" name="class" id="class" placeholder="Enter class number" required />
+      </div>
 
       <div class="input-row">
         <input type="tel" name="phone" id="phone" placeholder="Phone number" />
@@ -247,6 +250,7 @@
         feedbackTitle: "We value your feedback",
         messagePlaceholder: "Write your message here...",
         serialPlaceholder: "Enter screen serial number",
+        classPlaceholder: "Enter class number",
         phonePlaceholder: "Phone number",
         regionDefault: "Select region",
         schoolPlaceholder: "Enter your school name",
@@ -257,6 +261,7 @@
         feedbackTitle: "نقدّر ملاحظاتك",
         messagePlaceholder: "اكتب رسالتك هنا...",
         serialPlaceholder: "أدخل الرقم التسلسلي للشاشة",
+        classPlaceholder: "أدخل رقم الصف",
         phonePlaceholder: "رقم الهاتف",
         regionDefault: "اختر المنطقة",
         schoolPlaceholder: "أدخل اسم المدرسة",
@@ -272,6 +277,7 @@
       document.getElementById('feedback-title').innerText = translations[lang].feedbackTitle;
       document.getElementById('message').placeholder = translations[lang].messagePlaceholder;
       document.getElementById('serial').placeholder = translations[lang].serialPlaceholder;
+      document.getElementById('class').placeholder = translations[lang].classPlaceholder;
       document.getElementById('phone').placeholder = translations[lang].phonePlaceholder;
       document.getElementById('school').placeholder = translations[lang].schoolPlaceholder;
       document.getElementById('submit-btn').innerText = translations[lang].submit;
