@@ -253,6 +253,12 @@
         classPlaceholder: "Class number",
         phonePlaceholder: "Phone number",
         regionDefault: "Select region",
+        regions: [
+          "Select region",
+          "Muscat", "Dhofar", "Musandam", "Al Batinah North", "Al Batinah South",
+          "Al Dakhiliyah", "Al Wusta", "Al Dhahirah", "Al Sharqiyah North",
+          "Al Sharqiyah South", "Al Buraimi"
+        ],
         schoolPlaceholder: "School name",
         submit: "Send",
         toggleBtn: "العربية"
@@ -260,11 +266,17 @@
       ar: {
         feedbackTitle: "نقدّر ملاحظاتك",
         messagePlaceholder: "اكتب رسالتك هنا...",
-        serialPlaceholder: "أدخل الرقم التسلسلي للشاشة",
-        classPlaceholder: "أدخل رقم الصف",
+        serialPlaceholder: "الرقم التسلسلي للشاشة",
+        classPlaceholder: "رقم الصف",
         phonePlaceholder: "رقم الهاتف",
         regionDefault: "اختر المنطقة",
-        schoolPlaceholder: "أدخل اسم المدرسة",
+        regions: [
+          "اختر المنطقة",
+          "مسقط", "ظفار", "مسندم", "شمال الباطنة", "جنوب الباطنة",
+          "الداخلية", "الوسطى", "الظاهرة", "شمال الشرقية",
+          "جنوب الشرقية", "البريمي"
+        ],
+        schoolPlaceholder: "اسم المدرسة",
         submit: "إرسال",
         toggleBtn: "ENG"
       }
@@ -281,8 +293,16 @@
       document.getElementById('phone').placeholder = translations[lang].phonePlaceholder;
       document.getElementById('school').placeholder = translations[lang].schoolPlaceholder;
       document.getElementById('submit-btn').innerText = translations[lang].submit;
-      document.getElementById('region').options[0].text = translations[lang].regionDefault;
       document.getElementById('lang-toggle').children[0].innerText = translations[lang].toggleBtn;
+
+      const regionSelect = document.getElementById('region');
+      regionSelect.innerHTML = "";
+      translations[lang].regions.forEach(region => {
+        const option = document.createElement("option");
+        option.text = region;
+        option.value = region;
+        regionSelect.appendChild(option);
+      });
     }
   </script>
 </body>
