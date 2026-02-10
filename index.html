@@ -67,13 +67,17 @@
   let items = [];
 
   function login(){
-    const u=username.value,p=password.value;
-    if(users.find(x=>x.u===u&&x.p===p)){
-      loginPage.classList.add("hidden");
-      dashboard.classList.remove("hidden");
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+    
+    if (users.find(x => x.u === u && x.p === p)) {
+      document.getElementById("loginPage").classList.add("hidden");
+      document.getElementById("dashboard").classList.remove("hidden");
       loadData();
-    } else alert("بيانات خطأ");
+      } else {
+    alert("اسم المستخدم أو كلمة المرور غلط");
   }
+}
 
   function logout(){
     dashboard.classList.add("hidden");
