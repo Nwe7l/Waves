@@ -1,309 +1,697 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Feedback Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartStock - المخزون الذكي</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: url('https://i.imgur.com/614iMHw.jpeg');
-      background-size: cover;
-      background-position: center;
+      background: #090e1a;
+      color: #e2e8f0;
+    }
+    
+    .login-page {
       min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      position: relative;
+      justify-content: center;
     }
-
-    .background-blur {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      backdrop-filter: blur(5px);
-      z-index: 0;
+    
+    .login-card {
+      background: #1a2540;
+      border: 1px solid #243352;
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
     }
-
-    .loader-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      background: #fff;
+    
+    .login-card h1 {
+      color: #f1f5f9;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .input-group {
+      margin-bottom: 15px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #1e2d4a;
+      background: #0d1220;
+      color: #f1f5f9;
+      font-size: 14px;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    
+    .error {
+      color: #f87171;
+      font-size: 13px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    
+    .btn:hover {
+      opacity: 0.9;
+    }
+    
+    .hint {
+      color: #475569;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .dashboard {
+      min-height: 100vh;
+    }
+    
+    .nav {
+      background: #1a2540;
+      border-bottom: 1px solid #243352;
+      padding: 15px 25px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      z-index: 9999;
     }
-
-    .loader {
+    
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .nav-user {
+      color: #64748b;
+      font-size: 13px;
+    }
+    
+    .btn-logout {
+      padding: 6px 14px;
+      border-radius: 7px;
+      border: 1px solid #1e2d4a;
+      background: transparent;
+      color: #64748b;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    
+    .content {
+      padding: 25px;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .stat-card {
+      background: #1a2540;
+      border: 1px solid #243352;
+      border-radius: 15px;
+      padding: 20px;
+    }
+    
+    .stat-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      color: #64748b;
+      font-size: 12px;
+    }
+    
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .btn-add {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
+    }
+    
+    .item-card {
+      background: #1a2540;
+      border: 1px solid #243352;
+      border-radius: 15px;
+      padding: 18px;
+    }
+    
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    
+    .item-icon {
+      font-size: 36px;
       width: 50px;
       height: 50px;
-      border: 6px solid #ccc;
-      border-top-color: #3498db;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 10px;
     }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+    
+    .item-actions {
+      display: flex;
+      gap: 5px;
     }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      background: linear-gradient(to top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,1) 100%);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 90%;
-      max-width: 500px;
+    
+    .btn-action {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid #1e2d4a;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    .btn-delete {
+      border-color: rgba(244, 114, 182, 0.3);
+      color: #f472b6;
+    }
+    
+    .item-name {
+      color: #f1f5f9;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .item-category {
+      color: #64748b;
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+    
+    .item-price {
+      color: #34d399;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    
+    .btn-qty {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+      border: 1px solid #1e2d4a;
+      background: #0d1220;
+      color: #94a3b8;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    
+    .qty-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #38bdf8;
+      min-width: 40px;
       text-align: center;
     }
-
-    .logo {
+    
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    
+    .modal-content {
+      background: #1a2540;
+      border: 1px solid #243352;
+      border-radius: 18px;
+      padding: 30px;
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    .modal-title {
+      color: #f1f5f9;
+      font-size: 18px;
       margin-bottom: 20px;
     }
-
-    .logo img {
-      width: 100%;
-      max-width: 200px;
-      height: auto;
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    textarea, input, select {
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    
+    .form-group {
       margin-bottom: 15px;
     }
-
-    textarea {
-      height: 150px;
-      resize: vertical;
+    
+    .form-label {
+      display: block;
+      color: #64748b;
+      font-size: 11px;
+      margin-bottom: 5px;
     }
-
-    .button, .submit-btn {
-      padding: 12px 25px;
-      font-size: 16px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 7px;
+      border: 1px solid #1e2d4a;
+      background: #0d1220;
+      color: #f1f5f9;
+      font-size: 14px;
     }
-
-    .button:hover, .submit-btn:hover {
-      background-color: #2980b9;
-    }
-
-    .button {
-      margin-bottom: 20px;
-    }
-
-    .circle-links {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .circle-button {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #3498db;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      font-size: 24px;
-      transition: background-color 0.3s ease;
-    }
-
-    .circle-button:hover {
-      background-color: #2980b9;
-    }
-
-    .circle-button svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-
-    .input-row {
+    
+    .modal-buttons {
       display: flex;
       gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
+      margin-top: 20px;
     }
-
-    .input-row input,
-    .input-row select {
-      flex: 1 1 45%;
-      min-width: 120px;
+    
+    .btn-cancel {
+      flex: 1;
+      padding: 10px;
+      border-radius: 7px;
+      border: 1px solid #1e2d4a;
+      background: transparent;
+      color: #64748b;
+      cursor: pointer;
+    }
+    
+    .btn-save {
+      flex: 1;
+      padding: 10px;
+      border-radius: 7px;
+      border: none;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <!-- Language Toggle Button -->
-  <div id="lang-toggle" style="position: absolute; top: 20px; right: 20px; z-index: 10;">
-    <button onclick="toggleLanguage()" style="padding: 8px 16px; border: none; background: #3498db; color: white; border-radius: 8px; cursor: pointer;">
-      Arabic
-    </button>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-page">
+    <div class="login-card">
+      <h1>📦 SmartStock</h1>
+      <div class="input-group">
+        <input type="text" id="username" placeholder="اسم المستخدم" />
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="كلمة المرور" />
+      </div>
+      <div id="loginError" class="error hidden"></div>
+      <button class="btn" onclick="login()">تسجيل الدخول</button>
+      <p class="hint">admin/admin123 (مدير) • user/user123 (مستخدم)</p>
+    </div>
   </div>
 
-  <div class="background-blur"></div>
-
-  <div class="loader-wrapper">
-    <span class="loader"></span>
-  </div>
-
-  <div class="container">
-    <div class="logo">
-      <a href="https://www.wavestech.om/">
-        <img src="https://i.imgur.com/f9BNHEV.png" alt="Waves Technology & Services Logo">
-      </a>
+  <!-- Dashboard -->
+  <div id="dashboard" class="dashboard hidden">
+    <div class="nav">
+      <div class="nav-left">
+        <span class="nav-logo">📦 SmartStock</span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-user" id="currentUser"></span>
+        <button class="btn-logout" onclick="logout()">خروج</button>
+      </div>
     </div>
 
-    <button class="button" onclick="window.open('https://www.youtube.com/watch?v=YOUR_VIDEO_ID', '_blank')">Guidance</button>
-
-    <form action="https://formspree.io/f/xrbqqbdp" method="POST">
-      <h2 id="feedback-title">We value your feedback</h2>
-
-      <textarea name="message" id="message" placeholder="Write your message here..." required></textarea>
-
-      <div class="input-row">
-        <input type="text" name="serial" id="serial" placeholder="Screen serial number" required />
-        <input type="text" name="class" id="class" placeholder="Class number" required />
+    <div class="content">
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-value" id="totalQty">0</div>
+          <div class="stat-label">إجمالي الأغراض</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div class="stat-value" id="totalValue">0</div>
+          <div class="stat-label">قيمة المخزون</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏷️</div>
+          <div class="stat-value" id="itemCount">0</div>
+          <div class="stat-label">أنواع الأغراض</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚠️</div>
+          <div class="stat-value" id="lowStock">0</div>
+          <div class="stat-label">كمية منخفضة</div>
+        </div>
       </div>
 
-      <div class="input-row">
-        <input type="tel" name="phone" id="phone" placeholder="Phone number" />
-        <select name="region" id="region" required>
-          <option value="">Select region</option>
-          <option value="Muscat">Muscat</option>
-          <option value="Dhofar">Dhofar</option>
-          <option value="Musandam">Musandam</option>
-          <option value="Al Batinah North">Al Batinah North</option>
-          <option value="Al Batinah South">Al Batinah South</option>
-          <option value="Al Dakhiliyah">Al Dakhiliyah</option>
-          <option value="Al Wusta">Al Wusta</option>
-          <option value="Al Dhahirah">Al Dhahirah</option>
-          <option value="Al Sharqiyah North">Al Sharqiyah North</option>
-          <option value="Al Sharqiyah South">Al Sharqiyah South</option>
-          <option value="Al Buraimi">Al Buraimi</option>
-        </select>
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div></div>
+        <button class="btn-add" id="addBtn" onclick="openAddModal()">+ إضافة غرض</button>
       </div>
 
-      <input type="text" name="school" id="school" placeholder="School name" required />
+      <!-- Items Grid -->
+      <div class="items-grid" id="itemsGrid"></div>
+    </div>
+  </div>
 
-      <button class="submit-btn" id="submit-btn" type="submit">Send</button>
-
-      <div class="circle-links">
-        <a class="circle-button" href="https://www.wavestech.om/" target="_blank" title="Website">🌐</a>
-        <a class="circle-button" href="https://www.instagram.com/wavestech.om" target="_blank" title="Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5zm0 1.5h8.5c2.36 0 4.25 1.9 4.25 4.25v8.5c0 2.36-1.9 4.25-4.25 4.25h-8.5A4.25 4.25 0 0 1 3.5 16.25v-8.5C3.5 5.4 5.4 3.5 7.75 3.5zm8.75 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-4 1.5a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zm0 1.5a3.75 3.75 0 1 1 0 7.5 3.75 3.75 0 0 1 0-7.5z"/>
-          </svg>
-        </a>
-        <a class="circle-button" href="tel:+96824547118" title="+96824547118">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C11.3 21 3 12.7 3 2.99a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/>
-          </svg>
-        </a>
+  <!-- Modal -->
+  <div id="modal" class="modal hidden" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <h2 class="modal-title" id="modalTitle">إضافة غرض جديد</h2>
+      <div class="form-group">
+        <label class="form-label">الاسم</label>
+        <input type="text" class="form-input" id="itemName" />
       </div>
-    </form>
+      <div class="form-group">
+        <label class="form-label">الأيكون (إيموجي)</label>
+        <input type="text" class="form-input" id="itemIcon" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">الكمية</label>
+        <input type="number" class="form-input" id="itemQty" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">السعر (ريال)</label>
+        <input type="number" class="form-input" id="itemPrice" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">الفئة</label>
+        <input type="text" class="form-input" id="itemCategory" />
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-cancel" onclick="closeModal()">إلغاء</button>
+        <button class="btn-save" onclick="saveItem()">حفظ</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    window.addEventListener('load', function () {
-      document.querySelector('.loader-wrapper').style.display = 'none';
-    });
+    // Data
+    let currentUser = null;
+    let editingId = null;
+    let items = [
+      { id: 1, name: "شاشات", icon: "🖥️", qty: 15, category: "إلكترونيات", price: 850 },
+      { id: 2, name: "كيبورد", icon: "⌨️", qty: 30, category: "إلكترونيات", price: 120 },
+      { id: 3, name: "ماوس", icon: "🖱️", qty: 42, category: "إلكترونيات", price: 65 },
+      { id: 4, name: "كيبل USB", icon: "🔌", qty: 200, category: "كوابل", price: 12 },
+      { id: 5, name: "كيبل HDMI", icon: "🔗", qty: 85, category: "كوابل", price: 25 },
+      { id: 6, name: "مزودات طاقة", icon: "⚡", qty: 50, category: "إلكترونيات", price: 180 },
+      { id: 7, name: "كراسي", icon: "🪑", qty: 25, category: "أثاث", price: 400 },
+      { id: 8, name: "مكاتب", icon: "🪵", qty: 12, category: "أثاث", price: 950 },
+    ];
 
-    let isArabic = false;
+    const users = [
+      { username: "admin", password: "admin123", role: "admin" },
+      { username: "user", password: "user123", role: "viewer" }
+    ];
 
-    const translations = {
-      en: {
-        feedbackTitle: "We value your feedback",
-        messagePlaceholder: "Write your message here...",
-        serialPlaceholder: "Screen serial number",
-        classPlaceholder: "Class number",
-        phonePlaceholder: "Phone number",
-        regionDefault: "Select region",
-        regions: [
-          "Select region",
-          "Muscat", "Dhofar", "Musandam", "Al Batinah North", "Al Batinah South",
-          "Al Dakhiliyah", "Al Wusta", "Al Dhahirah", "Al Sharqiyah North",
-          "Al Sharqiyah South", "Al Buraimi"
-        ],
-        schoolPlaceholder: "School name",
-        submit: "Send",
-        toggleBtn: "العربية"
-      },
-      ar: {
-        feedbackTitle: "نقدّر ملاحظاتك",
-        messagePlaceholder: "اكتب رسالتك هنا...",
-        serialPlaceholder: "الرقم التسلسلي للشاشة",
-        classPlaceholder: "رقم الصف",
-        phonePlaceholder: "رقم الهاتف",
-        regionDefault: "اختر المنطقة",
-        regions: [
-          "اختر المنطقة",
-          "مسقط", "ظفار", "مسندم", "شمال الباطنة", "جنوب الباطنة",
-          "الداخلية", "الوسطى", "الظاهرة", "شمال الشرقية",
-          "جنوب الشرقية", "البريمي"
-        ],
-        schoolPlaceholder: "اسم المدرسة",
-        submit: "إرسال",
-        toggleBtn: "ENG"
+    // Load data
+    function loadData() {
+      const saved = localStorage.getItem('smartstock_items');
+      if (saved) {
+        items = JSON.parse(saved);
       }
-    };
-
-    function toggleLanguage() {
-      isArabic = !isArabic;
-      const lang = isArabic ? 'ar' : 'en';
-
-      document.getElementById('feedback-title').innerText = translations[lang].feedbackTitle;
-      document.getElementById('message').placeholder = translations[lang].messagePlaceholder;
-      document.getElementById('serial').placeholder = translations[lang].serialPlaceholder;
-      document.getElementById('class').placeholder = translations[lang].classPlaceholder;
-      document.getElementById('phone').placeholder = translations[lang].phonePlaceholder;
-      document.getElementById('school').placeholder = translations[lang].schoolPlaceholder;
-      document.getElementById('submit-btn').innerText = translations[lang].submit;
-      document.getElementById('lang-toggle').children[0].innerText = translations[lang].toggleBtn;
-
-      const regionSelect = document.getElementById('region');
-      regionSelect.innerHTML = "";
-      translations[lang].regions.forEach(region => {
-        const option = document.createElement("option");
-        option.text = region;
-        option.value = region;
-        regionSelect.appendChild(option);
-      });
     }
+
+    // Save data
+    function saveData() {
+      localStorage.setItem('smartstock_items', JSON.stringify(items));
+    }
+
+    // Login
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const user = users.find(u => u.username === username && u.password === password);
+      
+      if (user) {
+        currentUser = user;
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        document.getElementById('currentUser').textContent = user.username + (user.role === 'admin' ? ' 👑' : ' 👤');
+        
+        if (user.role !== 'admin') {
+          document.getElementById('addBtn').classList.add('hidden');
+        }
+        
+        loadData();
+        renderItems();
+        updateStats();
+      } else {
+        const error = document.getElementById('loginError');
+        error.textContent = 'اسم المستخدم أو كلمة المرور غلط';
+        error.classList.remove('hidden');
+      }
+    }
+
+    // Logout
+    function logout() {
+      currentUser = null;
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('dashboard').classList.add('hidden');
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('loginError').classList.add('hidden');
+    }
+
+    // Render items
+    function renderItems() {
+      const grid = document.getElementById('itemsGrid');
+      grid.innerHTML = items.map(item => `
+        <div class="item-card">
+          <div class="item-header">
+            <div class="item-icon">${item.icon}</div>
+            ${currentUser.role === 'admin' ? `
+              <div class="item-actions">
+                <button class="btn-action" onclick="editItem(${item.id})">✏️</button>
+                <button class="btn-action btn-delete" onclick="deleteItem(${item.id})">🗑️</button>
+              </div>
+            ` : ''}
+          </div>
+          <div class="item-name">${item.name}</div>
+          <div class="item-category">${item.category}</div>
+          <div class="item-price">${item.price} ريال</div>
+          ${currentUser.role === 'admin' ? `
+            <div class="qty-controls">
+              <button class="btn-qty" onclick="changeQty(${item.id}, -1)">−</button>
+              <span class="qty-value">${item.qty}</span>
+              <button class="btn-qty" onclick="changeQty(${item.id}, 1)">+</button>
+            </div>
+          ` : `
+            <div style="text-align:center;padding:10px 0">
+              <span class="qty-value">${item.qty}</span>
+              <span style="color:#64748b;font-size:11px;margin-right:5px">وحدة</span>
+            </div>
+          `}
+        </div>
+      `).join('');
+    }
+
+    // Update stats
+    function updateStats() {
+      const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
+      const totalValue = items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+      const lowStock = items.filter(item => item.qty <= 20).length;
+      
+      document.getElementById('totalQty').textContent = totalQty;
+      document.getElementById('totalValue').textContent = (totalValue / 1000).toFixed(1) + 'K';
+      document.getElementById('itemCount').textContent = items.length;
+      document.getElementById('lowStock').textContent = lowStock;
+    }
+
+    // Change quantity
+    function changeQty(id, delta) {
+      if (currentUser.role !== 'admin') {
+        alert('فقط المدير يقدر يعدل الكميات');
+        return;
+      }
+      
+      const item = items.find(i => i.id === id);
+      if (item) {
+        item.qty = Math.max(0, item.qty + delta);
+        saveData();
+        renderItems();
+        updateStats();
+      }
+    }
+
+    // Open add modal
+    function openAddModal() {
+      if (currentUser.role !== 'admin') {
+        alert('فقط المدير يقدر يضيف أغراض');
+        return;
+      }
+      
+      editingId = null;
+      document.getElementById('modalTitle').textContent = 'إضافة غرض جديد';
+      document.getElementById('itemName').value = '';
+      document.getElementById('itemIcon').value = '📦';
+      document.getElementById('itemQty').value = '0';
+      document.getElementById('itemPrice').value = '0';
+      document.getElementById('itemCategory').value = 'إلكترونيات';
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    // Edit item
+    function editItem(id) {
+      if (currentUser.role !== 'admin') {
+        alert('فقط المدير يقدر يعدل');
+        return;
+      }
+      
+      const item = items.find(i => i.id === id);
+      if (item) {
+        editingId = id;
+        document.getElementById('modalTitle').textContent = 'تعديل غرض';
+        document.getElementById('itemName').value = item.name;
+        document.getElementById('itemIcon').value = item.icon;
+        document.getElementById('itemQty').value = item.qty;
+        document.getElementById('itemPrice').value = item.price;
+        document.getElementById('itemCategory').value = item.category;
+        document.getElementById('modal').classList.remove('hidden');
+      }
+    }
+
+    // Save item
+    function saveItem() {
+      const name = document.getElementById('itemName').value;
+      const icon = document.getElementById('itemIcon').value;
+      const qty = parseInt(document.getElementById('itemQty').value) || 0;
+      const price = parseInt(document.getElementById('itemPrice').value) || 0;
+      const category = document.getElementById('itemCategory').value;
+      
+      if (!name) {
+        alert('الرجاء إدخال اسم الغرض');
+        return;
+      }
+      
+      if (editingId) {
+        const item = items.find(i => i.id === editingId);
+        if (item) {
+          item.name = name;
+          item.icon = icon;
+          item.qty = qty;
+          item.price = price;
+          item.category = category;
+        }
+      } else {
+        items.push({
+          id: Date.now(),
+          name,
+          icon,
+          qty,
+          price,
+          category
+        });
+      }
+      
+      saveData();
+      renderItems();
+      updateStats();
+      closeModal();
+    }
+
+    // Delete item
+    function deleteItem(id) {
+      if (currentUser.role !== 'admin') {
+        alert('فقط المدير يقدر يحذف');
+        return;
+      }
+      
+      if (confirm('هل أنت متأكد من حذف هذا الغرض؟')) {
+        items = items.filter(i => i.id !== id);
+        saveData();
+        renderItems();
+        updateStats();
+      }
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    // Enter key login
+    document.getElementById('password').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') login();
+    });
   </script>
 </body>
 </html>
